@@ -1,0 +1,35 @@
+blueprint:
+  name: CP-Turn switches ON at defined time
+  description: Turn switches on at defined time
+  domain: automation
+  input:
+    time_entity:
+      name: Time
+      selector:
+        time:
+    switch_entity:
+      name: Switch
+      selector:
+        target:
+          entity:
+            domain: switch
+#    transition_time:
+#      name: Transition
+#      selector:
+#        number:
+#          min: 0
+#          max: 180
+#          step: 10
+#          unit_of_measurement: sec
+#          mode: slider
+
+trigger:
+  platform: time
+  at: !input time_entity
+
+action:
+#  - service: switch.turn_off
+  - service: switch.turn_on
+    target: !input switch_entity
+#    data:
+#      transition: !input transition_time
